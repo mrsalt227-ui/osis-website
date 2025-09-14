@@ -23,7 +23,9 @@ header {
   justify-content:center;
   padding:20px 10px;
   height:220px;
-  position: relative;
+  position: sticky;
+  top:0;
+  z-index: 1000;
 }
 
 .header-photos {
@@ -77,11 +79,6 @@ main {
   box-shadow:0 4px 12px rgba(0,0,0,.06);
 }
 
-.card:hover {
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-  transform:translateY(-2px);
-}
-
 button {
   background:var(--accent);
   color:#fff;
@@ -125,16 +122,17 @@ footer {
   margin-top:12px;
 }
 
-/* Desktop nav default */
+/* Desktop nav */
 nav {
-  display:flex;
+  display: flex;
   gap:12px;
   justify-content:center;
   margin-top:12px;
+  z-index:1001;
 }
 
-/* Menu toggle tombol default desktop */
-.menu-toggle { display:none; }
+/* Menu toggle */
+.menu-toggle { display: none; }
 
 /* Responsive HP */
 @media (max-width:768px) {
