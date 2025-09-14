@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>OSIS Sekolah</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Tambahan CSS hamburger responsive */
+    .menu-toggle {
+      display:none;
+      font-size:24px;
+      cursor:pointer;
+      background:transparent;
+      border:none;
+      color:#fff;
+      margin-top:8px;
+    }
+    @media(max-width:768px){
+      .menu-toggle { display:block; }
+      nav {
+        display:none;
+        flex-direction:column;
+        gap:8px;
+      }
+      nav.active { display:flex; }
+    }
+  </style>
 </head>
 <body>
 <header>
@@ -14,7 +35,8 @@
     <img src="foto2.png" alt="Foto 2" class="side-photo">
   </div>
   <h1>OSIS Sekolah</h1>
-  <nav>
+  <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+  <nav id="main-nav">
     <a onclick="showPage('home')">Home</a>
     <a onclick="showPage('anggota')">Anggota</a>
     <a onclick="showPage('pengumuman')">Pengumuman</a>
@@ -91,6 +113,11 @@
 const ADMIN_PASSWORD = "admin123";
 let anggota = [];
 let pengumuman = [];
+
+// Toggle menu responsive
+function toggleMenu(){
+  document.getElementById('main-nav').classList.toggle('active');
+}
 
 // Navigasi antar halaman
 function showPage(id){
