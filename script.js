@@ -42,6 +42,62 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================
+// Fetch & Render Pengumuman
+// ============================
+async function loadPengumuman() {
+  try {
+    const res = await fetch('/api/pengumuman');
+    const data = await res.json();
+    const list = document.getElementById('pengumuman-list');
+    list.innerHTML = '';
+    data.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'card small';
+      div.innerHTML = `<strong>${p.title}</strong><br>${p.content}`;
+      list.appendChild(div);
+    });
+  } catch(err) {
+    console.error('Gagal load pengumuman:', err);
+  }
+}
+
+// Panggil saat halaman load
+document.addEventListener('DOMContentLoaded', () => {
+  loadPengumuman();
+  setInterval(loadPengumuman, 5000); // auto refresh tiap 5 detik
+});
+
+// ============================
+// Admin Submit Form
+// ============================
+document.getElementById('form-ann').addEventListener('submit', async e => {
+  e.preventDefault();
+  const title = document.getElementById('ann-title').value;
+  const content = document.getElementById('ann-content').value;
+  const password = document.getElementById('admin-pass').value;
+
+  try {
+    const res = await fetch('/api/pengumuman', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body: JSON.stringify({ title, content, password })
+    });
+    const data = await res.json();
+    if(data.success) {
+      e.target.reset();
+      loadPengumuman();
+      alert('Pengumuman berhasil ditambahkan!');
+    } else {
+      alert(data.error || 'Gagal menambahkan pengumuman');
+    }
+  } catch(err) {
+    alert('Gagal menambahkan pengumuman');
+    console.error(err);
+  }
+});
+
+
+// ============================
 // Admin login / logout (simple)
 // ============================
 const ADMIN_PASSWORD = "admin123";
