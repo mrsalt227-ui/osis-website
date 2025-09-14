@@ -6,7 +6,7 @@ let anggota = [];
 let pengumuman = [];
 
 // ===================
-// Menu dan navigasi
+// Menu & navigasi
 // ===================
 function toggleMenu(){
   document.getElementById('main-nav').classList.toggle('active');
@@ -18,7 +18,7 @@ function showPage(id){
 }
 
 // ===================
-// Login / Logout Admin
+// Admin login/logout
 // ===================
 function loginAdmin(){
   const pass = document.getElementById("admin-pass").value;
@@ -36,7 +36,7 @@ function logoutAdmin(){
 }
 
 // ===================
-// Tambah pengumuman
+// Tambah anggota & pengumuman
 // ===================
 document.getElementById("form-ann").addEventListener("submit", e => {
   e.preventDefault();
@@ -47,9 +47,6 @@ document.getElementById("form-ann").addEventListener("submit", e => {
   e.target.reset();
 });
 
-// ===================
-// Tambah anggota
-// ===================
 document.getElementById("form-member").addEventListener("submit", e => {
   e.preventDefault();
   const name = document.getElementById("mem-name").value;
@@ -59,13 +56,10 @@ document.getElementById("form-member").addEventListener("submit", e => {
   e.target.reset();
 });
 
-// ===================
-// Render daftar
-// ===================
 function renderPengumuman(){
   const list = document.getElementById("pengumuman-list");
   list.innerHTML = "";
-  pengumuman.forEach((p) => {
+  pengumuman.forEach(p => {
     const div = document.createElement("div");
     div.className = "card small";
     div.innerHTML = `<strong>${p.title}</strong><br>${p.content}`;
@@ -76,7 +70,7 @@ function renderPengumuman(){
 function renderAnggota(){
   const list = document.getElementById("anggota-list");
   list.innerHTML = "";
-  anggota.forEach((m) => {
+  anggota.forEach(m => {
     const li = document.createElement("li");
     li.textContent = `${m.name} — ${m.role}`;
     list.appendChild(li);
@@ -84,7 +78,7 @@ function renderAnggota(){
 }
 
 // ===================
-// Header shrink saat scroll
+// Header shrink smooth
 // ===================
 const header = document.querySelector("header");
 const headerTitle = header.querySelector("h1");
@@ -93,43 +87,26 @@ const main = document.querySelector("main");
 
 function shrinkHeaderOnScroll() {
   const scrollY = window.scrollY;
-
-  // Header default
-  const defaultHeight = 220;
-  const minHeight = 120;
-  const defaultPadding = 20;
   const minPadding = 8;
-  const defaultFont = 2; // rem
   const minFont = 1.2;
+  const minImg = 60;
+  const minLogo = 40;
 
-  // Hitung nilai baru berdasarkan scroll
-  const newHeight = Math.max(minHeight, defaultHeight - scrollY);
-  const newPadding = Math.max(minPadding, defaultPadding - scrollY / 10);
-  const newFont = Math.max(minFont, defaultFont - scrollY / 200);
-  const newImgHeight = Math.max(60, 180 - scrollY / 2);
-  const newLogoHeight = Math.max(40, 120 - scrollY / 2);
-
-  // Terapkan ke header dan anak-anak
-  header.style.height = newHeight + "px";
-  header.style.padding = newPadding + "px";
-  headerTitle.style.fontSize = newFont + "rem";
+  header.style.padding = Math.max(minPadding, 20 - scrollY / 10) + "px";
+  headerTitle.style.fontSize = Math.max(minFont, 2 - scrollY / 200) + "rem";
 
   headerPhotos.forEach(img => {
-    if (img.classList.contains("logo")) {
-      img.style.height = newLogoHeight + "px";
+    if(img.classList.contains("logo")){
+      img.style.height = Math.max(minLogo, 120 - scrollY / 2) + "px";
     } else {
-      img.style.height = newImgHeight + "px";
+      img.style.height = Math.max(minImg, 180 - scrollY / 2) + "px";
     }
   });
-
-  // Pastikan main content selalu di bawah header
-  main.style.marginTop = newHeight + "px";
 }
 
 window.addEventListener("scroll", shrinkHeaderOnScroll);
 window.addEventListener("resize", shrinkHeaderOnScroll);
 shrinkHeaderOnScroll();
-
 
 // ===================
 // Footer tahun otomatis
