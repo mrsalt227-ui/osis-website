@@ -4,135 +4,93 @@
   --accent:#16a34a;
   --muted:#4b5563;
 }
-
-* {
-  box-sizing: border-box;
-  transition: all .3s ease;
-}
-
+* { box-sizing:border-box; transition:all .3s ease; }
 body {
-  font-family: Inter, system-ui, Arial, sans-serif;
-  background: var(--bg);
-  margin: 0;
-  color: #111;
+  font-family:Inter,system-ui,Arial,sans-serif;
+  background:var(--bg);
+  margin:0;
+  color:#111;
 }
-
-/* HEADER */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: linear-gradient(90deg, #28a745, #20c997);
-  color: white;
-  padding: 20px 0;
-  text-align: center;
-  transition: all 0.3s ease;
-  z-index: 1000;
+  background:linear-gradient(135deg,var(--accent),#22c55e);
+  color:#fff;
+  padding:20px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:50;
 }
-
-/* Logo & foto */
-.header-photos img {
-  height: 120px;
-  margin: 0 15px;
-  transition: all 0.3s ease;
-  border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,.25);
+.header-photos {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
 }
-
-/* Saat shrink */
-header.shrink {
-  padding: 8px 0;
+.logo {
+  height:80px;
+  width:auto;
+  border-radius:8px;
+  box-shadow:0 3px 8px rgba(0,0,0,.2);
 }
-header.shrink .header-photos img {
-  height: 70px; /* ukuran pas saat mengecil */
+.side-photo {
+  height:120px;
+  width:auto;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.3);
 }
-header h1 {
-  color: white;
-  font-size: 28px;
-  margin: 0 12px;
-  transition: all 0.4s ease;
-}
-header.shrink h1 {
-  font-size: 20px;
-}
-
-/* NAV */
 nav a {
-  color: rgba(255,255,255,.95);
-  margin: 0 8px;
-  text-decoration: none;
-  font-weight: 600;
-  position: relative;
+  color:rgba(255,255,255,.95);
+  margin:0 12px;
+  text-decoration:none;
+  font-weight:600;
+  position:relative;
 }
 nav a::after {
   content:"";
-  position: absolute;
+  position:absolute;
   left:0; bottom:-4px;
   width:0; height:2px;
   background:#fff;
   transition:width .3s;
 }
-nav a:hover::after {width:100%;}
+nav a:hover::after { width:100%; }
 
-/* CONTAINER */
-.container {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-/* SUPAYA KONTEN GA KETIBAN HEADER */
 main {
-  padding-top: 260px; /* tinggi header + foto */
+  max-width:980px;
+  margin:20px auto;
+  padding:0 16px;
+  position:relative;
+  min-height:400px;
 }
-
-/* CARD */
 .card {
-  background: var(--card);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.06);
-  transition: all .3s;
+  background:var(--card);
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:14px;
+  box-shadow:0 4px 12px rgba(0,0,0,.06);
 }
 .card:hover {
-  box-shadow: 0 8px 20px rgba(0,0,0,.12);
-  transform: translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,.12);
+  transform:translateY(-2px);
 }
-
-h1,h2,h3 { margin: 0 0 10px; }
-.muted { color: var(--muted); }
-
-/* FORM */
-form input, form textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 8px;
-  border: 1px solid #d1fae5;
-  border-radius: 6px;
-}
+h1,h2,h3 { margin:0 0 10px; }
 button {
-  background: var(--accent);
-  color: #fff;
-  border: 0;
-  padding: 8px 10px;
-  border-radius: 8px;
-  cursor: pointer;
+  background:var(--accent);
+  color:#fff;
+  border:0;
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
 }
-button:hover { opacity:.9; transform: scale(1.03); }
-
-/* FOOTER */
+button:hover { opacity:.9; transform:scale(1.03); }
 footer {
-  padding: 18px;
-  text-align: center;
-  color: #666;
-  font-size: 14px;
-  border-top: 2px solid #bbf7d0;
-  margin-top: 20px;
+  padding:18px;
+  text-align:center;
+  color:#666;
+  font-size:14px;
+  border-top:2px solid #bbf7d0;
+  margin-top:20px;
 }
-
-/* ADMIN */
 .admin-badge {
   background:#fff;
   color:var(--accent);
@@ -147,21 +105,26 @@ footer {
   color:var(--accent);
   cursor:pointer;
 }
-
-/* ANIMASI FADE PAGE */
+/* Layout admin */
+.grid-2 {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+/* Animasi halaman */
 .page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(.98);
-  transition: opacity .5s, transform .5s;
+  position:absolute;
+  top:0; left:0;
+  width:100%;
+  opacity:0;
+  pointer-events:none;
+  transform:scale(.98);
+  transition:opacity .5s, transform .5s;
 }
 .page.active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
-  position: relative;
+  opacity:1;
+  pointer-events:auto;
+  transform:scale(1);
+  position:relative;
 }
