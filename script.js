@@ -93,16 +93,37 @@ const main = document.querySelector("main");
 
 function shrinkHeaderOnScroll() {
   const scrollY = window.scrollY;
-  const maxShrink = 0.6; // minimal scale 60%
-  const scale = Math.max(1 - scrollY / 400, maxShrink);
 
-  // Shrink visual
-  header.style.transform = `scaleY(${scale})`;
-  headerTitle.style.transform = `scale(${scale})`;
-  headerPhotos.forEach(img => img.style.transform = `scale(${scale})`);
+  // Header default
+  const defaultHeight = 220;
+  const minHeight = 120;
+  const defaultPadding = 20;
+  const minPadding = 8;
+  const defaultFont = 2; // rem
+  const minFont = 1.2;
 
-  // Main tetap berada di bawah header default
-  main.style.marginTop = "220px"; // tinggi header default
+  // Hitung nilai baru berdasarkan scroll
+  const newHeight = Math.max(minHeight, defaultHeight - scrollY);
+  const newPadding = Math.max(minPadding, defaultPadding - scrollY / 10);
+  const newFont = Math.max(minFont, defaultFont - scrollY / 200);
+  const newImgHeight = Math.max(60, 180 - scrollY / 2);
+  const newLogoHeight = Math.max(40, 120 - scrollY / 2);
+
+  // Terapkan ke header dan anak-anak
+  header.style.height = newHeight + "px";
+  header.style.padding = newPadding + "px";
+  headerTitle.style.fontSize = newFont + "rem";
+
+  headerPhotos.forEach(img => {
+    if (img.classList.contains("logo")) {
+      img.style.height = newLogoHeight + "px";
+    } else {
+      img.style.height = newImgHeight + "px";
+    }
+  });
+
+  // Pastikan main content selalu di bawah header
+  main.style.marginTop = newHeight + "px";
 }
 
 window.addEventListener("scroll", shrinkHeaderOnScroll);
