@@ -1,93 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OSIS Sekolah</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <div class="header-photos">
-    <img src="foto1.png" alt="Foto 1" class="side-photo">
-    <img src="logo-sekolah.png" alt="Logo Sekolah" class="logo">
-    <img src="foto2.png" alt="Foto 2" class="side-photo">
-  </div>
-  <h1>OSIS Sekolah</h1>
-  <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
-  <nav id="main-nav">
-    <a onclick="showPage('home')">Home</a>
-    <a onclick="showPage('anggota')">Anggota</a>
-    <a onclick="showPage('pengumuman')">Pengumuman</a>
-    <a onclick="showPage('admin')">Admin</a>
-  </nav>
-</header>
-
-<main>
-  <!-- HOME -->
-  <section id="home" class="page active">
-    <div class="card">
-      <h2>Selamat Datang</h2>
-      <p>Ini adalah website resmi OSIS sekolah. Silakan pilih menu di atas.</p>
+  <header>
+    <div class="header-photos">
+      <img src="foto1.png" alt="Foto 1" class="side-photo">
+      <img src="logo-sekolah.png" alt="Logo" class="logo">
+      <img src="foto2.png" alt="Foto 2" class="side-photo">
     </div>
-  </section>
+    <h1>OSIS Sekolah</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+    <nav id="main-nav">
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('anggota')">Anggota</a>
+      <a onclick="showPage('pengumuman')">Pengumuman</a>
+      <a onclick="showPage('admin')">Admin</a>
+    </nav>
+  </header>
 
-  <!-- ANGGOTA -->
-  <section id="anggota" class="page">
-    <div class="card">
-      <h2>Daftar Anggota</h2>
-      <ul id="anggota-list"></ul>
-    </div>
-  </section>
-
-  <!-- PENGUMUMAN -->
-  <section id="pengumuman" class="page">
-    <div class="card">
-      <h2>Pengumuman</h2>
-      <div id="pengumuman-list"></div>
-    </div>
-  </section>
-
-  <!-- ADMIN -->
-  <section id="admin" class="page">
-    <div class="card">
-      <h2>Login Admin</h2>
-      <div id="login-box">
-        <input type="password" id="admin-pass" placeholder="Masukkan password">
-        <button onclick="loginAdmin()">Masuk</button>
+  <main>
+    <section id="home" class="page active">
+      <div class="card">
+        <h2>Selamat Datang</h2>
+        <p>Ini adalah website resmi OSIS sekolah. Silakan pilih menu di atas.</p>
       </div>
-      <div id="admin-panel" style="display:none">
-        <h3>Dashboard Admin <span class="admin-badge">Admin</span></h3>
-        <div class="grid-2">
-          <div>
-            <h4>Tambah Pengumuman</h4>
-            <form id="form-ann">
-              <input id="ann-title" placeholder="Judul" required>
-              <textarea id="ann-content" placeholder="Isi pengumuman" rows="4" required></textarea>
-              <button type="submit">Simpan</button>
-            </form>
+    </section>
+
+    <section id="anggota" class="page">
+      <div class="card">
+        <h2>Daftar Anggota</h2>
+        <ul id="anggota-list"></ul>
+      </div>
+    </section>
+
+    <section id="pengumuman" class="page">
+      <div class="card">
+        <h2>Pengumuman</h2>
+        <div id="pengumuman-list"></div>
+      </div>
+    </section>
+
+    <section id="admin" class="page">
+      <div class="card">
+        <h2>Login Admin</h2>
+        <div id="login-box">
+          <input type="password" id="admin-pass" placeholder="Masukkan password">
+          <button onclick="loginAdmin()">Masuk</button>
+        </div>
+        <div id="admin-panel" style="display:none">
+          <h3>Dashboard Admin <span class="admin-badge">Admin</span></h3>
+          <div class="grid-2">
+            <div>
+              <h4>Tambah Pengumuman</h4>
+              <form id="form-ann">
+                <input id="ann-title" placeholder="Judul" required>
+                <textarea id="ann-content" placeholder="Isi pengumuman" rows="4" required></textarea>
+                <button type="submit">Simpan</button>
+              </form>
+            </div>
+            <div>
+              <h4>Tambah Anggota</h4>
+              <form id="form-member">
+                <input id="mem-name" placeholder="Nama" required>
+                <input id="mem-role" placeholder="Jabatan / Kelas">
+                <button type="submit">Simpan</button>
+              </form>
+            </div>
           </div>
-          <div>
-            <h4>Tambah Anggota</h4>
-            <form id="form-member">
-              <input id="mem-name" placeholder="Nama" required>
-              <input id="mem-role" placeholder="Jabatan / Kelas">
-              <button type="submit">Simpan</button>
-            </form>
+          <div style="margin-top:12px">
+            <button class="link-btn" onclick="logoutAdmin()">Logout</button>
           </div>
         </div>
-        <div style="margin-top:12px">
-          <button class="link-btn" onclick="logoutAdmin()">Logout</button>
-        </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 
-<footer>
-  <p>&copy; <span id="yr"></span> OSIS Sekolah</p>
-</footer>
+  <footer>
+    <p>&copy; <span id="yr"></span> OSIS Sekolah</p>
+  </footer>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
