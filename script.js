@@ -1,13 +1,21 @@
+// ===================
+// DATA & LOCAL STORAGE
+// ===================
 const ADMIN_PASSWORD = "admin123";
-let anggota = [];
-let pengumuman = [];
+let anggota = JSON.parse(localStorage.getItem('anggota')) || [];
+let pengumuman = JSON.parse(localStorage.getItem('pengumuman')) || [];
 
-// Toggle menu HP
+// ===================
+// TOGGLE MENU HP
+// ===================
 function toggleMenu() {
-  document.getElementById('main-nav').classList.toggle('active');
+  const nav = document.getElementById('main-nav');
+  nav.classList.toggle('active');
 }
 
-// Show Page
+// ===================
+// NAVIGASI PAGE
+// ===================
 function showPage(id){
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -19,7 +27,9 @@ function showPage(id){
   }
 }
 
-// Admin login/logout
+// ===================
+// ADMIN LOGIN / LOGOUT
+// ===================
 function loginAdmin() {
   const pass = document.getElementById('admin-pass').value;
   if(pass === ADMIN_PASSWORD){
@@ -33,34 +43,42 @@ function logoutAdmin() {
   document.getElementById('admin-panel').style.display='none';
 }
 
-// Tambah pengumuman
+// ===================
+// TAMBAH PENGUMUMAN
+// ===================
 document.getElementById('form-ann').addEventListener('submit', e=>{
   e.preventDefault();
   const title = document.getElementById('ann-title').value;
   const content = document.getElementById('ann-content').value;
   pengumuman.push({title, content});
+  localStorage.setItem('pengumuman', JSON.stringify(pengumuman));
   renderPengumuman();
   e.target.reset();
 });
 
-// Tambah anggota
+// ===================
+// TAMBAH ANGGOTA
+// ===================
 document.getElementById('form-member').addEventListener('submit', e=>{
   e.preventDefault();
   const name = document.getElementById('mem-name').value;
   const role = document.getElementById('mem-role').value;
   anggota.push({name, role});
+  localStorage.setItem('anggota', JSON.stringify(anggota));
   renderAnggota();
   e.target.reset();
 });
 
-// Render daftar
+// ===================
+// RENDER PENGUMUMAN & ANGGOTA
+// ===================
 function renderPengumuman() {
   const list = document.getElementById('pengumuman-list');
-  list.innerHTML='';
+  list.innerHTML = '';
   pengumuman.forEach(p=>{
     const div = document.createElement('div');
-    div.className='card small';
-    div.innerHTML=`<strong>${p.title}</strong><br>${p.content}`;
+    div.className = 'card small';
+    div.innerHTML = `<strong>${p.title}</strong><br>${p.content}`;
     list.appendChild(div);
   });
 }
@@ -69,16 +87,20 @@ function renderAnggota() {
   const list = document.getElementById('anggota-list');
   list.innerHTML='';
   anggota.forEach(m=>{
-    const li=document.createElement('li');
+    const li = document.createElement('li');
     li.textContent=`${m.name} — ${m.role}`;
     list.appendChild(li);
   });
 }
 
-// Tahun footer
+// ===================
+// FOOTER TAHUN
+// ===================
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-// Header shrink smooth
+// ===================
+// HEADER SHRINK ON SCROLL
+// ===================
 const header = document.querySelector('header');
 const headerTitle = header.querySelector('h1');
 const headerPhotos = header.querySelectorAll('.header-photos img');
@@ -108,3 +130,9 @@ function shrinkHeaderOnScroll() {
 window.addEventListener('scroll', shrinkHeaderOnScroll);
 window.addEventListener('resize', shrinkHeaderOnScroll);
 shrinkHeaderOnScroll();
+
+// ===================
+// INITIAL RENDER
+// ===================
+renderPengumuman();
+renderAnggota();
