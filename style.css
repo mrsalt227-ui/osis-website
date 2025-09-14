@@ -63,7 +63,7 @@ main {
   margin:0 auto;
   padding:0 16px;
   min-height:400px;
-  margin-top:220px; /* start below header */
+  margin-top:220px;
 }
 
 .page { display:none; }
@@ -125,19 +125,25 @@ footer {
   margin-top:12px;
 }
 
-/* Responsive */
-.menu-toggle {
-  display: none; /* default desktop: sembunyikan */
-  font-size: 24px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  color: #fff;
-  margin-top: 8px;
+/* Desktop nav default */
+nav {
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin-top:12px;
 }
 
+/* Menu toggle tombol default desktop */
+.menu-toggle { display:none; }
+
+/* Responsive HP */
 @media (max-width:768px) {
-  .menu-toggle { display: block; } /* tampilkan hanya HP */
-  nav { display: none; flex-direction: column; gap: 8px; margin-top: 12px; }
-  nav.active { display: flex; }
+  .menu-toggle { display:block; }
+  nav { display:none; flex-direction:column; gap:8px; margin-top:12px; }
+  nav.active { display:flex; }
+
+  .header-photos { flex-direction:column; align-items:center; gap:12px; }
+  .header-photos img, .logo { height:auto; max-width:80%; }
+  .grid-2 { grid-template-columns:1fr; }
+  main { padding:0 12px; }
 }
