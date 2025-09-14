@@ -129,6 +129,7 @@ nav {
   justify-content:center;
   margin-top:12px;
   z-index:1001;
+  position: relative;
 }
 
 /* Menu toggle */
@@ -136,8 +137,25 @@ nav {
 
 /* Responsive HP */
 @media (max-width:768px) {
-  .menu-toggle { display:block; }
-  nav { display:none; flex-direction:column; gap:8px; margin-top:12px; }
+  .menu-toggle { 
+    display:block; 
+    position: relative; 
+    z-index:1100; 
+  }
+
+  nav { 
+    display:none; 
+    flex-direction:column; 
+    gap:8px; 
+    margin-top:12px; 
+    position:absolute; 
+    top:100%; 
+    left:0; 
+    width:100%; 
+    background: linear-gradient(135deg,var(--accent),#22c55e);
+    z-index:1099; 
+  }
+  
   nav.active { display:flex; }
 
   .header-photos { flex-direction:column; align-items:center; gap:12px; }
