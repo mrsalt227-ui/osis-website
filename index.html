@@ -2,163 +2,167 @@
 <html lang="id">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>OSIS Sekolah</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <div class="header-photos">
-    <img src="foto1.png" alt="Foto 1" class="side-photo">
+  <!-- HEADER -->
+  <header id="main-header">
+    <img src="foto1.png" alt="Foto Kiri" class="side-photo">
     <img src="logo-sekolah.png" alt="Logo Sekolah" class="logo">
-    <img src="foto2.png" alt="Foto 2" class="side-photo">
-  </div>
-  <h1>OSIS Sekolah</h1>
-  <nav>
+    <h1>OSIS Sekolah</h1>
+    <img src="foto2.png" alt="Foto Kanan" class="side-photo">
+  </header>
+
+  <nav class="container" style="text-align:center;margin-top:10px">
     <a onclick="showPage('home')">Home</a>
     <a onclick="showPage('anggota')">Anggota</a>
     <a onclick="showPage('pengumuman')">Pengumuman</a>
     <a onclick="showPage('admin')">Admin</a>
   </nav>
-</header>
 
-
-<main>
-  <!-- HOME -->
-  <section id="home" class="page active">
-    <div class="card">
-      <h2>Selamat Datang</h2>
-      <p>Ini adalah website resmi OSIS sekolah. Silakan pilih menu di atas.</p>
-    </div>
-  </section>
-
-  <!-- ANGGOTA -->
-  <section id="anggota" class="page">
-    <div class="card">
-      <h2>Daftar Anggota</h2>
-      <ul id="anggota-list"></ul>
-    </div>
-  </section>
-
-  <!-- PENGUMUMAN -->
-  <section id="pengumuman" class="page">
-    <div class="card">
-      <h2>Pengumuman</h2>
-      <div id="pengumuman-list"></div>
-    </div>
-  </section>
-
-  <!-- ADMIN -->
-  <section id="admin" class="page">
-    <div class="card">
-      <h2>Login Admin</h2>
-      <div id="login-box">
-        <input type="password" id="admin-pass" placeholder="Masukkan password">
-        <button onclick="loginAdmin()">Masuk</button>
+  <main class="container" style="position:relative;min-height:400px">
+    <!-- HOME -->
+    <section id="home" class="page active">
+      <div class="card">
+        <h2>Selamat Datang</h2>
+        <p class="muted">Ini adalah website resmi OSIS sekolah. Silakan pilih menu di atas.</p>
       </div>
-      <div id="admin-panel" style="display:none">
-        <h3>Dashboard Admin <span class="admin-badge">Admin</span></h3>
-        <div class="grid-2">
-          <div>
-            <h4>Tambah Pengumuman</h4>
-            <form id="form-ann">
-              <input id="ann-title" placeholder="Judul" required>
-              <textarea id="ann-content" placeholder="Isi pengumuman" rows="4" required></textarea>
-              <button type="submit">Simpan</button>
-            </form>
+    </section>
+
+    <!-- ANGGOTA -->
+    <section id="anggota" class="page">
+      <div class="card">
+        <h2>Daftar Anggota</h2>
+        <ul id="anggota-list" class="muted"></ul>
+      </div>
+    </section>
+
+    <!-- PENGUMUMAN -->
+    <section id="pengumuman" class="page">
+      <div class="card">
+        <h2>Pengumuman</h2>
+        <div id="pengumuman-list" class="muted"></div>
+      </div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="admin" class="page">
+      <div class="card">
+        <h2>Login Admin</h2>
+        <div id="login-box">
+          <input type="password" id="admin-pass" placeholder="Masukkan password">
+          <button onclick="loginAdmin()">Masuk</button>
+        </div>
+        <div id="admin-panel" style="display:none">
+          <h3>Dashboard Admin <span class="admin-badge">Admin</span></h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+            <div>
+              <h4>Tambah Pengumuman</h4>
+              <form id="form-ann">
+                <input id="ann-title" placeholder="Judul" required>
+                <textarea id="ann-content" placeholder="Isi pengumuman" rows="4" required></textarea>
+                <button type="submit">Simpan</button>
+              </form>
+            </div>
+            <div>
+              <h4>Tambah Anggota</h4>
+              <form id="form-member">
+                <input id="mem-name" placeholder="Nama" required>
+                <input id="mem-role" placeholder="Jabatan / Kelas">
+                <button type="submit">Simpan</button>
+              </form>
+            </div>
           </div>
-          <div>
-            <h4>Tambah Anggota</h4>
-            <form id="form-member">
-              <input id="mem-name" placeholder="Nama" required>
-              <input id="mem-role" placeholder="Jabatan / Kelas">
-              <button type="submit">Simpan</button>
-            </form>
+          <div style="margin-top:12px">
+            <button class="link-btn" onclick="logoutAdmin()">Logout</button>
           </div>
         </div>
-        <div style="margin-top:12px">
-          <button class="link-btn" onclick="logoutAdmin()">Logout</button>
-        </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 
-<footer>
-  <p>&copy; <span id="yr"></span> OSIS Sekolah</p>
-</footer>
+  <footer>
+    <div class="container">&copy; <span id="yr"></span> OSIS Sekolah — Tema Hijau</div>
+  </footer>
 
-<script>
-const ADMIN_PASSWORD = "admin123";
-let anggota = [];
-let pengumuman = [];
+  <script>
+    const ADMIN_PASSWORD = "admin123";
+    let anggota = [];
+    let pengumuman = [];
 
-// Navigasi antar halaman
-function showPage(id){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  setTimeout(()=>{ document.getElementById(id).classList.add("active"); },50);
-}
+    // switch page
+    function showPage(id){
+      document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+      setTimeout(()=>document.getElementById(id).classList.add("active"),50);
+    }
 
-// Login admin
-function loginAdmin(){
-  const pass = document.getElementById("admin-pass").value;
-  if(pass === ADMIN_PASSWORD){
-    document.getElementById("login-box").style.display="none";
-    document.getElementById("admin-panel").style.display="block";
-  } else {
-    alert("Password salah!");
-  }
-}
+    // login
+    function loginAdmin(){
+      const pass = document.getElementById("admin-pass").value;
+      if(pass === ADMIN_PASSWORD){
+        document.getElementById("login-box").style.display="none";
+        document.getElementById("admin-panel").style.display="block";
+      } else {
+        alert("Password salah!");
+      }
+    }
+    function logoutAdmin(){
+      document.getElementById("login-box").style.display="block";
+      document.getElementById("admin-panel").style.display="none";
+    }
 
-// Logout admin
-function logoutAdmin(){
-  document.getElementById("login-box").style.display="block";
-  document.getElementById("admin-panel").style.display="none";
-}
+    // tambah pengumuman
+    document.getElementById("form-ann").addEventListener("submit", e=>{
+      e.preventDefault();
+      const title = document.getElementById("ann-title").value;
+      const content = document.getElementById("ann-content").value;
+      pengumuman.push({title,content});
+      renderPengumuman();
+      e.target.reset();
+    });
 
-// Tambah pengumuman
-document.getElementById("form-ann").addEventListener("submit", e=>{
-  e.preventDefault();
-  const title = document.getElementById("ann-title").value;
-  const content = document.getElementById("ann-content").value;
-  pengumuman.push({title,content});
-  renderPengumuman();
-  e.target.reset();
-});
+    // tambah anggota
+    document.getElementById("form-member").addEventListener("submit", e=>{
+      e.preventDefault();
+      const name = document.getElementById("mem-name").value;
+      const role = document.getElementById("mem-role").value;
+      anggota.push({name,role});
+      renderAnggota();
+      e.target.reset();
+    });
 
-// Tambah anggota
-document.getElementById("form-member").addEventListener("submit", e=>{
-  e.preventDefault();
-  const name = document.getElementById("mem-name").value;
-  const role = document.getElementById("mem-role").value;
-  anggota.push({name,role});
-  renderAnggota();
-  e.target.reset();
-});
+    function renderPengumuman(){
+      const list = document.getElementById("pengumuman-list");
+      list.innerHTML = "";
+      pengumuman.forEach(p=>{
+        const div = document.createElement("div");
+        div.className="card small";
+        div.innerHTML = `<strong>${p.title}</strong><br>${p.content}`;
+        list.appendChild(div);
+      });
+    }
+    function renderAnggota(){
+      const list = document.getElementById("anggota-list");
+      list.innerHTML = "";
+      anggota.forEach(m=>{
+        const li = document.createElement("li");
+        li.textContent = `${m.name} — ${m.role}`;
+        list.appendChild(li);
+      });
+    }
 
-// Render daftar
-function renderPengumuman(){
-  const list = document.getElementById("pengumuman-list");
-  list.innerHTML = "";
-  pengumuman.forEach((p)=> {
-    const div = document.createElement("div");
-    div.className="card small";
-    div.innerHTML = `<strong>${p.title}</strong><br>${p.content}`;
-    list.appendChild(div);
-  });
-}
-function renderAnggota(){
-  const list = document.getElementById("anggota-list");
-  list.innerHTML = "";
-  anggota.forEach((m)=> {
-    const li = document.createElement("li");
-    li.textContent = `${m.name} — ${m.role}`;
-    list.appendChild(li);
-  });
-}
+    document.getElementById("yr").textContent = new Date().getFullYear();
 
-// Tahun footer
-document.getElementById("yr").textContent = new Date().getFullYear();
-</script>
+    // shrink header saat scroll
+    const header = document.getElementById("main-header");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        header.classList.add("shrink");
+      } else {
+        header.classList.remove("shrink");
+      }
+    });
+  </script>
 </body>
 </html>
