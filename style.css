@@ -27,17 +27,18 @@ header {
   margin-bottom:10px;
 }
 .logo {
-  height:80px;
+  height:80px;          /* logo utama */
   width:auto;
   border-radius:8px;
   box-shadow:0 3px 8px rgba(0,0,0,.2);
 }
 .side-photo {
-  height:120px;
+  height:100px;         /* foto samping, lebih kecil */
   width:auto;
-  border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,.3);
+  border-radius:10px;
+  box-shadow:0 3px 6px rgba(0,0,0,.25);
 }
+
 nav a {
   color:rgba(255,255,255,.95);
   margin:0 12px;
