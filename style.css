@@ -17,17 +17,19 @@ body {
 header {
   background: linear-gradient(135deg,var(--accent),#22c55e);
   color:#fff;
-  padding:20px 10px;
   text-align:center;
-  position: sticky;
+  position: fixed;
   top:0;
+  left:0;
+  width:100%;
   z-index:50;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  height: 220px; /* default tinggi header */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  height:220px;
+  padding:20px 10px;
   transition: height 0.3s ease, padding 0.3s ease;
 }
 
@@ -87,8 +89,8 @@ main {
   margin:0 auto;
   padding:0 16px;
   min-height:400px;
-  margin-top: 220px; /* agar konten mulai di bawah header */
-  transition: margin-top 0.3s ease;
+  padding-top: 220px; /* header default height */
+  transition: padding-top 0.3s ease;
 }
 
 .card {
