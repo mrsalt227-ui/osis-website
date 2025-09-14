@@ -5,26 +5,25 @@
   --muted:#4b5563;
 }
 
-* { box-sizing:border-box; transition:all .3s ease; }
+* { box-sizing:border-box; transition: all .3s ease; }
 
 body {
   font-family:Inter,system-ui,Arial,sans-serif;
-  background: var(--bg);
   margin:0;
+  background: var(--bg);
   color:#111;
 }
 
 header {
   background: linear-gradient(135deg,var(--accent),#22c55e);
-  color:#fff;
   text-align:center;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  height:220px; /* default header height */
   padding:20px 10px;
-  position: relative; /* tidak fixed/sticky */
+  height:220px;
+  position: relative;
 }
 
 .header-photos {
@@ -64,8 +63,11 @@ main {
   margin:0 auto;
   padding:0 16px;
   min-height:400px;
-  margin-top:220px; /* konten mulai di bawah header */
+  margin-top:220px; /* start below header */
 }
+
+.page { display:none; }
+.page.active { display:block; }
 
 .card {
   background:var(--card);
@@ -79,8 +81,6 @@ main {
   box-shadow:0 8px 20px rgba(0,0,0,.12);
   transform:translateY(-2px);
 }
-
-h1,h2,h3 { margin:0 0 10px; }
 
 button {
   background:var(--accent);
@@ -125,20 +125,11 @@ footer {
   margin-top:12px;
 }
 
-/* Responsive HP */
+/* Responsive */
 @media (max-width:768px) {
-  .header-photos {
-    flex-direction:column;
-    align-items:center;
-    gap:12px;
-  }
-  .header-photos img, .logo {
-    height:auto;
-    max-width:80%;
-  }
+  .header-photos { flex-direction:column; align-items:center; gap:12px; }
+  .header-photos img, .logo { height:auto; max-width:80%; }
   .grid-2 { grid-template-columns:1fr; }
   main { padding:0 12px; }
   .menu-toggle { display:block; }
-  nav { display:none; flex-direction:column; gap:8px; margin-top:12px; }
-  nav.active { display:flex; }
-}
+  nav { display:none; flex-direction:column
