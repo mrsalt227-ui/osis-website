@@ -126,10 +126,18 @@ footer {
 }
 
 /* Responsive */
+.menu-toggle {
+  display: none; /* default desktop: sembunyikan */
+  font-size: 24px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #fff;
+  margin-top: 8px;
+}
+
 @media (max-width:768px) {
-  .header-photos { flex-direction:column; align-items:center; gap:12px; }
-  .header-photos img, .logo { height:auto; max-width:80%; }
-  .grid-2 { grid-template-columns:1fr; }
-  main { padding:0 12px; }
-  .menu-toggle { display:block; }
-  nav { display:none; flex-direction:column
+  .menu-toggle { display: block; } /* tampilkan hanya HP */
+  nav { display: none; flex-direction: column; gap: 8px; margin-top: 12px; }
+  nav.active { display: flex; }
+}
