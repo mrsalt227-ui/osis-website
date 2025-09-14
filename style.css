@@ -33,7 +33,7 @@ header {
   box-shadow:0 3px 8px rgba(0,0,0,.2);
 }
 .side-photo {
-  height:100px;         /* foto samping, lebih kecil */
+  height:150px;         /* foto samping, lebih kecil */
   width:auto;
   border-radius:10px;
   box-shadow:0 3px 6px rgba(0,0,0,.25);
