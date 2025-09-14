@@ -80,20 +80,30 @@ document.getElementById("yr").textContent = new Date().getFullYear();
 const header = document.querySelector("header");
 const headerTitle = header.querySelector("h1");
 const headerPhotos = header.querySelectorAll(".header-photos img");
+const logo = header.querySelector(".logo");
 
-function updateHeaderScale() {
+function shrinkHeaderOnScroll() {
   const scrollY = window.scrollY;
-  const isMobile = window.innerWidth <= 768;
-  const minScale = isMobile ? 0.8 : 0.7; // batas minimal
-  const scale = Math.max(minScale, 1 - scrollY / 500);
+  const maxShrink = 100; // maksimal header menyusut 100px
+  const newHeight = Math.max(120, 220 - scrollY); // minimal height 120px
+  const newPadding = Math.max(8, 20 - scrollY / 10); // padding mengecil
+  const newFont = Math.max(1.2, 2 - scrollY / 200); // font mengecil
+  const newImgHeight = Math.max(60, 180 - scrollY / 2); // gambar samping mengecil
+  const newLogoHeight = Math.max(40, 120 - scrollY / 2); // logo mengecil
 
-  header.style.transform = `scale(${scale})`;
-  headerTitle.style.transform = `scale(${scale})`;
+  header.style.height = newHeight + "px";
+  header.style.padding = newPadding + "px";
+  headerTitle.style.fontSize = newFont + "rem";
+
   headerPhotos.forEach(img => {
-    img.style.transform = `scale(${scale})`;
+    if(img.classList.contains("logo")){
+      img.style.height = newLogoHeight + "px";
+    } else {
+      img.style.height = newImgHeight + "px";
+    }
   });
 }
 
-window.addEventListener("scroll", updateHeaderScale);
-window.addEventListener("resize", updateHeaderScale);
-updateHeaderScale();
+window.addEventListener("scroll", shrinkHeaderOnScroll);
+window.addEventListener("resize", shrinkHeaderOnScroll);
+shrinkHeaderOnScroll();
