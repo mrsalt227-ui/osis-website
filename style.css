@@ -1,0 +1,134 @@
+:root {
+  --bg:#f0fdf4;
+  --card:#fff;
+  --accent:#16a34a;
+  --muted:#4b5563;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:#111;
+}
+
+/* Header */
+header {
+  background:linear-gradient(135deg,var(--accent),#22c55e);
+  color:#fff;
+  padding:20px;
+  text-align:center;
+}
+
+.logo-group {
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  margin-bottom:10px;
+}
+
+.logo {
+  height:60px;
+  border-radius:8px;
+  box-shadow:0 3px 8px rgba(0,0,0,.2);
+  transition:transform .3s;
+}
+
+.logo:hover {
+  transform:scale(1.1);
+}
+
+h1 {
+  margin:10px 0;
+}
+
+/* Navigasi */
+nav a {
+  color:#fff;
+  margin:0 12px;
+  text-decoration:none;
+  font-weight:bold;
+  position:relative;
+}
+
+nav a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+  width:0;
+  height:2px;
+  background:#fff;
+  transition:width .3s;
+}
+
+nav a:hover::after {
+  width:100%;
+}
+
+/* Konten */
+main {
+  max-width:900px;
+  margin:20px auto;
+  padding:0 16px;
+}
+
+.page {
+  background:var(--card);
+  padding:16px;
+  margin-bottom:16px;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,.06);
+  opacity:0;
+  transform:translateY(10px);
+  transition:all .5s ease;
+  display:none;
+}
+
+.page.active {
+  display:block;
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Form Admin */
+.admin-form {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  max-width:300px;
+  margin:auto;
+}
+
+.admin-form input, .admin-form button {
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+
+.admin-form button {
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.admin-form button:hover {
+  background:#15803d;
+}
+
+/* Footer */
+footer {
+  background:#d1fae5;
+  color:#333;
+  padding:14px;
+  text-align:center;
+  margin-top:30px;
+  border-top:2px solid #bbf7d0;
+}
