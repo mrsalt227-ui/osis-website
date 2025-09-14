@@ -27,8 +27,8 @@ header {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: height 0.3s ease, padding 0.3s ease;
   height: 220px; /* default tinggi header */
+  transition: height 0.3s ease, padding 0.3s ease;
 }
 
 .header-photos {
@@ -37,7 +37,6 @@ header {
   align-items:center;
   width:100%;
   margin-bottom:12px;
-  transition: transform 0.3s ease;
 }
 
 .header-photos img {
@@ -64,7 +63,6 @@ header h1 {
   font-size: 2rem; /* default */
 }
 
-
 nav a {
   color:rgba(255,255,255,.95);
   margin:0 12px;
@@ -86,10 +84,11 @@ nav a:hover::after { width:100%; }
 
 main {
   max-width:980px;
-  margin:20px auto;
+  margin:0 auto;
   padding:0 16px;
-  position:relative;
   min-height:400px;
+  margin-top: 220px; /* agar konten mulai di bawah header */
+  transition: margin-top 0.3s ease;
 }
 
 .card {
