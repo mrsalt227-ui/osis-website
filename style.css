@@ -134,29 +134,31 @@ footer {
 /* ==========================
    RESPONSIVE UNTUK HP
 ========================== */
+/* RESPONSIVE HANYA UNTUK HP */
 @media (max-width:768px) {
   .header-photos {
-    flex-direction:column;
+    flex-direction:column;   /* gambar ditumpuk vertikal */
+    align-items:center;
     gap:12px;
   }
-  .side-photo {
-    height:120px;
-    width:80%;
+  .side-photo, .logo {
+    height:auto;       /* jaga proporsi */
+    max-width:80%;     /* jangan terlalu lebar di HP */
+    flex-shrink:0;
   }
-  .logo {
-    height:100px;
-    width:60%;
+  .grid-2 {
+    grid-template-columns:1fr; /* grid admin 1 kolom */
   }
+  main {
+    padding:0 12px;    /* lebih sempit di HP */
+  }
+  .menu-toggle { display:block; }   /* tombol menu hamburger */
   nav {
-    display:flex;
+    display:none;
     flex-direction:column;
     gap:8px;
     margin-top:12px;
   }
-  .grid-2 {
-    grid-template-columns:1fr; /* ubah jadi 1 kolom */
-  }
-  main {
-    padding:0 12px;
-  }
+  nav.active { display:flex; }
 }
+
