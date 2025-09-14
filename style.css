@@ -22,23 +22,23 @@ header {
 }
 .header-photos {
   display:flex;
-  justify-content:space-between;
+  justify-content:space-around;  /* beri ruang seimbang */
   align-items:center;
-  margin-bottom:10px;
-  gap:20px;            /* kasih jarak antar gambar */
+  width:100%;                     /* penuh */
+  margin-bottom:12px;
 }
 
 .side-photo {
-  height:150px;        /* ukuran sesuai permintaan */
-  flex:0 0 auto;       /* cegah mengecil */
+  height:180px;   /* besar sesuai permintaan */
+  flex-shrink:0;  /* cegah mengecil */
   width:auto;
   border-radius:12px;
   box-shadow:0 4px 10px rgba(0,0,0,.3);
 }
 
 .logo {
-  height:100px;        /* logo sekolah agak lebih kecil */
-  flex:0 0 auto;
+  height:120px;   /* logo tengah agak lebih kecil */
+  flex-shrink:0;
   width:auto;
   border-radius:8px;
   box-shadow:0 3px 8px rgba(0,0,0,.2);
