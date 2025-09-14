@@ -4,131 +4,127 @@
   --accent:#16a34a;
   --muted:#4b5563;
 }
-
-* {
-  box-sizing:border-box;
-}
-
+* { box-sizing:border-box; transition:all .3s ease; }
 body {
-  margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Inter,system-ui,Arial,sans-serif;
   background:var(--bg);
+  margin:0;
   color:#111;
 }
-
-/* Header */
 header {
   background:linear-gradient(135deg,var(--accent),#22c55e);
   color:#fff;
   padding:20px;
   text-align:center;
+  position:sticky;
+  top:0;
+  z-index:50;
 }
-
-.logo-group {
+.header-photos {
   display:flex;
-  justify-content:center;
-  gap:16px;
+  justify-content:space-between;
+  align-items:center;
   margin-bottom:10px;
 }
-
 .logo {
-  height:60px;
+  height:80px;
+  width:auto;
   border-radius:8px;
   box-shadow:0 3px 8px rgba(0,0,0,.2);
-  transition:transform .3s;
 }
-
-.logo:hover {
-  transform:scale(1.1);
+.side-photo {
+  height:120px;
+  width:auto;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.3);
 }
-
-h1 {
-  margin:10px 0;
-}
-
-/* Navigasi */
 nav a {
-  color:#fff;
+  color:rgba(255,255,255,.95);
   margin:0 12px;
   text-decoration:none;
-  font-weight:bold;
+  font-weight:600;
   position:relative;
 }
-
 nav a::after {
   content:"";
   position:absolute;
-  left:0;
-  bottom:-4px;
-  width:0;
-  height:2px;
+  left:0; bottom:-4px;
+  width:0; height:2px;
   background:#fff;
   transition:width .3s;
 }
+nav a:hover::after { width:100%; }
 
-nav a:hover::after {
-  width:100%;
-}
-
-/* Konten */
 main {
-  max-width:900px;
+  max-width:980px;
   margin:20px auto;
   padding:0 16px;
+  position:relative;
+  min-height:400px;
 }
-
-.page {
+.card {
   background:var(--card);
-  padding:16px;
-  margin-bottom:16px;
   border-radius:12px;
+  padding:16px;
+  margin-bottom:14px;
   box-shadow:0 4px 12px rgba(0,0,0,.06);
-  opacity:0;
-  transform:translateY(10px);
-  transition:all .5s ease;
-  display:none;
 }
-
-.page.active {
-  display:block;
-  opacity:1;
-  transform:translateY(0);
+.card:hover {
+  box-shadow:0 8px 20px rgba(0,0,0,.12);
+  transform:translateY(-2px);
 }
-
-/* Form Admin */
-.admin-form {
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  max-width:300px;
-  margin:auto;
-}
-
-.admin-form input, .admin-form button {
-  padding:10px;
-  border-radius:6px;
-  border:1px solid #ccc;
-  font-size:14px;
-}
-
-.admin-form button {
+h1,h2,h3 { margin:0 0 10px; }
+button {
   background:var(--accent);
   color:#fff;
-  border:none;
+  border:0;
+  padding:8px 10px;
+  border-radius:8px;
   cursor:pointer;
-  font-weight:bold;
 }
-
-.admin-form button:hover {
-  background:#15803d;
-}
-
-/* Footer */
+button:hover { opacity:.9; transform:scale(1.03); }
 footer {
-  background:#d1fae5;
-  color:#333;
-  padding:14px;
+  padding:18px;
   text-align:center;
-  margin-top:30px;
+  color:#666;
+  font-size:14px;
   border-top:2px solid #bbf7d0;
+  margin-top:20px;
+}
+.admin-badge {
+  background:#fff;
+  color:var(--accent);
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:700;
+  margin-left:8px;
+}
+.link-btn {
+  background:transparent;
+  border:0;
+  color:var(--accent);
+  cursor:pointer;
+}
+/* Layout admin */
+.grid-2 {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+/* Animasi halaman */
+.page {
+  position:absolute;
+  top:0; left:0;
+  width:100%;
+  opacity:0;
+  pointer-events:none;
+  transform:scale(.98);
+  transition:opacity .5s, transform .5s;
+}
+.page.active {
+  opacity:1;
+  pointer-events:auto;
+  transform:scale(1);
+  position:relative;
 }
