@@ -25,19 +25,25 @@ header {
   justify-content:space-between;
   align-items:center;
   margin-bottom:10px;
+  gap:20px;            /* kasih jarak antar gambar */
 }
+
+.side-photo {
+  height:150px;        /* ukuran sesuai permintaan */
+  flex:0 0 auto;       /* cegah mengecil */
+  width:auto;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.3);
+}
+
 .logo {
-  height:80px;          /* logo utama */
+  height:100px;        /* logo sekolah agak lebih kecil */
+  flex:0 0 auto;
   width:auto;
   border-radius:8px;
   box-shadow:0 3px 8px rgba(0,0,0,.2);
 }
-.side-photo {
-  height:150px;         /* foto samping, lebih kecil */
-  width:auto;
-  border-radius:10px;
-  box-shadow:0 3px 6px rgba(0,0,0,.25);
-}
+
 
 nav a {
   color:rgba(255,255,255,.95);
