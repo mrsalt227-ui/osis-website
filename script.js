@@ -91,33 +91,24 @@ const headerTitle = header.querySelector("h1");
 const headerPhotos = header.querySelectorAll(".header-photos img");
 const main = document.querySelector("main");
 
-function shrinkHeaderOnScroll(){
+function shrinkHeaderOnScroll() {
   const scrollY = window.scrollY;
-  const minHeight = 120;
-  const maxHeight = 220;
-  const newHeight = Math.max(minHeight, maxHeight - scrollY);
-  const newPadding = Math.max(8, 20 - scrollY / 10);
-  const newFont = Math.max(1.2, 2 - scrollY / 200);
-  const newImgHeight = Math.max(60, 180 - scrollY / 2);
-  const newLogoHeight = Math.max(40, 120 - scrollY / 2);
+  const maxShrink = 0.6; // minimal scale 60%
+  const scale = Math.max(1 - scrollY / 400, maxShrink);
 
-  header.style.height = newHeight + "px";
-  header.style.padding = newPadding + "px";
-  headerTitle.style.fontSize = newFont + "rem";
-  main.style.paddingTop = newHeight + "px";
+  // Shrink visual
+  header.style.transform = `scaleY(${scale})`;
+  headerTitle.style.transform = `scale(${scale})`;
+  headerPhotos.forEach(img => img.style.transform = `scale(${scale})`);
 
-  headerPhotos.forEach(img => {
-    if(img.classList.contains("logo")){
-      img.style.height = newLogoHeight + "px";
-    } else {
-      img.style.height = newImgHeight + "px";
-    }
-  });
+  // Main tetap berada di bawah header default
+  main.style.marginTop = "220px"; // tinggi header default
 }
 
 window.addEventListener("scroll", shrinkHeaderOnScroll);
 window.addEventListener("resize", shrinkHeaderOnScroll);
 shrinkHeaderOnScroll();
+
 
 // ===================
 // Footer tahun otomatis
