@@ -5,7 +5,7 @@
   --muted:#4b5563;
 }
 
-* { box-sizing:border-box; transition: all .3s ease; }
+* { box-sizing:border-box; transition:all .3s ease; }
 
 body {
   font-family:Inter,system-ui,Arial,sans-serif;
@@ -22,14 +22,9 @@ header {
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
-  height:220px;
+  height:220px; /* default header height */
   padding:20px 10px;
-  transition: height 0.3s ease, padding 0.3s ease;
-  position: relative; /* penting supaya tidak menutupi main */
-  width: 100%;
-  top:0;
-  left:0;
+  position: relative; /* tidak fixed/sticky */
 }
 
 .header-photos {
@@ -46,7 +41,7 @@ header {
   width:auto;
   border-radius:12px;
   box-shadow:0 4px 10px rgba(0,0,0,.3);
-  transition: height 0.3s ease;
+  transition: height .3s ease;
 }
 
 .logo {
@@ -55,13 +50,13 @@ header {
   width:auto;
   border-radius:8px;
   box-shadow:0 3px 8px rgba(0,0,0,.2);
-  transition: height 0.3s ease;
+  transition: height .3s ease;
 }
 
 header h1 {
   margin:10px 0 0;
-  transition: font-size 0.3s ease;
   font-size:2rem;
+  transition: font-size .3s ease;
 }
 
 main {
@@ -69,8 +64,7 @@ main {
   margin:0 auto;
   padding:0 16px;
   min-height:400px;
-  padding-top:220px; /* tinggi header default */
-  transition: padding-top 0.3s ease;
+  margin-top:220px; /* konten mulai di bawah header */
 }
 
 .card {
@@ -108,7 +102,30 @@ footer {
   margin-top:20px;
 }
 
-/* responsive */
+.admin-badge {
+  background:#fff;
+  color:var(--accent);
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:700;
+  margin-left:8px;
+}
+
+.link-btn {
+  background:transparent;
+  border:0;
+  color:var(--accent);
+  cursor:pointer;
+}
+
+.grid-2 {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+
+/* Responsive HP */
 @media (max-width:768px) {
   .header-photos {
     flex-direction:column;
@@ -119,5 +136,9 @@ footer {
     height:auto;
     max-width:80%;
   }
+  .grid-2 { grid-template-columns:1fr; }
   main { padding:0 12px; }
+  .menu-toggle { display:block; }
+  nav { display:none; flex-direction:column; gap:8px; margin-top:12px; }
+  nav.active { display:flex; }
 }
