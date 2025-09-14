@@ -22,22 +22,28 @@ header {
 }
 .header-photos {
   display:flex;
-  justify-content:space-between;
+  justify-content:space-around;  /* beri ruang seimbang */
   align-items:center;
-  margin-bottom:10px;
+  width:100%;                     /* penuh */
+  margin-bottom:12px;
 }
-.logo {
-  height:80px;
-  width:auto;
-  border-radius:8px;
-  box-shadow:0 3px 8px rgba(0,0,0,.2);
-}
+
 .side-photo {
-  height:120px;
+  height:180px;   /* besar sesuai permintaan */
+  flex-shrink:0;  /* cegah mengecil */
   width:auto;
   border-radius:12px;
   box-shadow:0 4px 10px rgba(0,0,0,.3);
 }
+
+.logo {
+  height:120px;   /* logo tengah agak lebih kecil */
+  flex-shrink:0;
+  width:auto;
+  border-radius:8px;
+  box-shadow:0 3px 8px rgba(0,0,0,.2);
+}
+
 nav a {
   color:rgba(255,255,255,.95);
   margin:0 12px;
