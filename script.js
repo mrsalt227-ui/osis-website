@@ -75,22 +75,25 @@ function renderAnggota(){
 document.getElementById("yr").textContent = new Date().getFullYear();
 
 // ========================
-// Efek scroll responsive
+// Efek scroll header + teks + gambar
 // ========================
-const headerPhotos = document.querySelectorAll(".header-photos img");
+const header = document.querySelector("header");
+const headerTitle = header.querySelector("h1");
+const headerPhotos = header.querySelectorAll(".header-photos img");
 
-function updateImageScale() {
+function updateHeaderScale() {
   const scrollY = window.scrollY;
-  const isMobile = window.innerWidth <= 768; // cek HP
-  const minScale = isMobile ? 0.7 : 0.5;     // batas minimal berbeda
+  const isMobile = window.innerWidth <= 768;
+  const minScale = isMobile ? 0.8 : 0.7; // batas minimal
   const scale = Math.max(minScale, 1 - scrollY / 500);
+
+  header.style.transform = `scale(${scale})`;
+  headerTitle.style.transform = `scale(${scale})`;
   headerPhotos.forEach(img => {
     img.style.transform = `scale(${scale})`;
   });
 }
 
-window.addEventListener("scroll", updateImageScale);
-window.addEventListener("resize", updateImageScale);
-
-// Jalankan awal agar langsung sesuai ukuran layar
-updateImageScale();
+window.addEventListener("scroll", updateHeaderScale);
+window.addEventListener("resize", updateHeaderScale);
+updateHeaderScale();
