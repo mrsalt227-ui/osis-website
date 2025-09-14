@@ -18,7 +18,6 @@ body {
 }
 
 /* HEADER */
-/* Header tetap di atas */
 header {
   position: fixed;
   top: 0;
@@ -32,7 +31,7 @@ header {
   z-index: 1000;
 }
 
-/* Logo dan foto */
+/* Logo & foto */
 .header-photos img {
   height: 120px;
   margin: 0 15px;
@@ -41,22 +40,24 @@ header {
   box-shadow: 0 3px 8px rgba(0,0,0,.25);
 }
 
-/* Saat header mengecil */
+/* Saat shrink */
 header.shrink {
-  padding: 5px 0;
+  padding: 8px 0;
 }
 header.shrink .header-photos img {
-  height: 60px; /* mengecil jadi setengah */
+  height: 70px; /* ukuran pas saat mengecil */
 }
-
-
 header h1 {
   color: white;
   font-size: 28px;
   margin: 0 12px;
   transition: all 0.4s ease;
 }
+header.shrink h1 {
+  font-size: 20px;
+}
 
+/* NAV */
 nav a {
   color: rgba(255,255,255,.95);
   margin: 0 8px;
@@ -74,19 +75,16 @@ nav a::after {
 }
 nav a:hover::after {width:100%;}
 
-/* Shrink effect */
-header.shrink {
-  padding: 8px 12px;
-}
-header.shrink img.logo { height: 45px; }
-header.shrink img.side-photo { height: 60px; }
-header.shrink h1 { font-size: 20px; }
-
 /* CONTAINER */
 .container {
   max-width: 980px;
-  margin: 18px auto;
+  margin: 0 auto;
   padding: 0 16px;
+}
+
+/* SUPAYA KONTEN GA KETIBAN HEADER */
+main {
+  padding-top: 260px; /* tinggi header + foto */
 }
 
 /* CARD */
@@ -153,7 +151,7 @@ footer {
 /* ANIMASI FADE PAGE */
 .page {
   position: absolute;
-  top: 120px;
+  top: 0;
   left: 0;
   width: 100%;
   opacity: 0;
