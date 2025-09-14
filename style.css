@@ -4,13 +4,16 @@
   --accent:#16a34a;
   --muted:#4b5563;
 }
+
 * { box-sizing:border-box; transition:all .3s ease; }
+
 body {
   font-family:Inter,system-ui,Arial,sans-serif;
   background:var(--bg);
   margin:0;
   color:#111;
 }
+
 header {
   background:linear-gradient(135deg,var(--accent),#22c55e);
   color:#fff;
@@ -20,20 +23,25 @@ header {
   top:0;
   z-index:50;
 }
+
 .header-photos {
   display:flex;
   justify-content:space-around;
   align-items:center;
   width:100%;
   margin-bottom:12px;
+  overflow:hidden;
 }
-.side-photo {
+
+.header-photos img {
   height:180px;
   flex-shrink:0;
   width:auto;
   border-radius:12px;
   box-shadow:0 4px 10px rgba(0,0,0,.3);
+  transition: transform 0.3s ease; /* transisi scroll */
 }
+
 .logo {
   height:120px;
   flex-shrink:0;
@@ -41,6 +49,7 @@ header {
   border-radius:8px;
   box-shadow:0 3px 8px rgba(0,0,0,.2);
 }
+
 nav a {
   color:rgba(255,255,255,.95);
   margin:0 12px;
@@ -48,6 +57,7 @@ nav a {
   font-weight:600;
   position:relative;
 }
+
 nav a::after {
   content:"";
   position:absolute;
@@ -56,7 +66,9 @@ nav a::after {
   background:#fff;
   transition:width .3s;
 }
+
 nav a:hover::after { width:100%; }
+
 main {
   max-width:980px;
   margin:20px auto;
@@ -64,6 +76,7 @@ main {
   position:relative;
   min-height:400px;
 }
+
 .card {
   background:var(--card);
   border-radius:12px;
@@ -71,11 +84,14 @@ main {
   margin-bottom:14px;
   box-shadow:0 4px 12px rgba(0,0,0,.06);
 }
+
 .card:hover {
   box-shadow:0 8px 20px rgba(0,0,0,.12);
   transform:translateY(-2px);
 }
+
 h1,h2,h3 { margin:0 0 10px; }
+
 button {
   background:var(--accent);
   color:#fff;
@@ -84,7 +100,9 @@ button {
   border-radius:8px;
   cursor:pointer;
 }
+
 button:hover { opacity:.9; transform:scale(1.03); }
+
 footer {
   padding:18px;
   text-align:center;
@@ -93,6 +111,7 @@ footer {
   border-top:2px solid #bbf7d0;
   margin-top:20px;
 }
+
 .admin-badge {
   background:#fff;
   color:var(--accent);
@@ -101,12 +120,14 @@ footer {
   font-weight:700;
   margin-left:8px;
 }
+
 .link-btn {
   background:transparent;
   border:0;
   color:var(--accent);
   cursor:pointer;
 }
+
 /* Layout admin */
 .grid-2 {
   display:grid;
@@ -114,6 +135,7 @@ footer {
   gap:12px;
   margin-top:12px;
 }
+
 /* Animasi halaman */
 .page {
   position:absolute;
@@ -124,6 +146,7 @@ footer {
   transform:scale(.98);
   transition:opacity .5s, transform .5s;
 }
+
 .page.active {
   opacity:1;
   pointer-events:auto;
@@ -134,31 +157,22 @@ footer {
 /* ==========================
    RESPONSIVE UNTUK HP
 ========================== */
-/* RESPONSIVE HANYA UNTUK HP */
 @media (max-width:768px) {
   .header-photos {
-    flex-direction:column;   /* gambar ditumpuk vertikal */
+    flex-direction:column;
     align-items:center;
     gap:12px;
   }
-  .side-photo, .logo {
-    height:auto;       /* jaga proporsi */
-    max-width:80%;     /* jangan terlalu lebar di HP */
+  .header-photos img, .logo {
+    height:auto;
+    max-width:80%;
     flex-shrink:0;
   }
   .grid-2 {
-    grid-template-columns:1fr; /* grid admin 1 kolom */
+    grid-template-columns:1fr;
   }
-  main {
-    padding:0 12px;    /* lebih sempit di HP */
-  }
-  .menu-toggle { display:block; }   /* tombol menu hamburger */
-  nav {
-    display:none;
-    flex-direction:column;
-    gap:8px;
-    margin-top:12px;
-  }
+  main { padding:0 12px; }
+  .menu-toggle { display:block; }
+  nav { display:none; flex-direction:column; gap:8px; margin-top:12px; }
   nav.active { display:flex; }
 }
-
