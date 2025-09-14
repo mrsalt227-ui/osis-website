@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>OSIS Sekolah — Static HTML (Tema Hijau)</title>
+<style>
+  :root{--bg:#f0fdf4;--card:#fff;--accent:#16a34a;--muted:#4b5563}
+  *{box-sizing:border-box}
+  body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);margin:0;color:#111}
+  header{background:linear-gradient(135deg,var(--accent),#22c55e);color:#fff;padding:22px;display:flex;align-items:center;gap:16px}
+  header img.logo{height:60px;width:auto;border-radius:8px;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+  .container{max-width:980px;margin:18px auto;padding:0 16px}
+  nav a{color:rgba(255,255,255,.95);margin-right:12px;text-decoration:none;font-weight:600}
+  .card{background:var(--card);border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+  h1,h2{margin:0 0 10px}
+  .muted{color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  form input, form textarea{width:100%;padding:8px;margin-bottom:8px;border:1px solid #d1fae5;border-radius:6px}
+  button{background:var(--accent);color:#fff;border:0;padding:8px 10px;border-radius:8px;cursor:pointer}
+  .small{font-size:13px}
+  footer{padding:18px;text-align:center;color:#666;font-size:14px}
+  .admin-badge{background:#fff;color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:700;margin-left:8px}
+  .actions{display:flex;gap:8px;flex-wrap:wrap}
+  .link-btn{background:transparent;border:0;color:var(--accent);cursor:pointer}
+  @media (max-width:600px){header{flex-direction:column;align-items:flex-start;padding:16px}}
+</style>
+</head>
+<body>
+<header>
+  <img src="logo-sekolah.png" alt="Logo Sekolah" class="logo">
+  <div class="container" style="padding:0">
+    <h1>OSIS Sekolah <small class="small">(Static - HTML + LocalStorage)</small></h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">Tentang</a>
+      <a href="#members">Anggota</a>
+      <a href="#news">Pengumuman</a>
+      <a href="#contact">Kontak</a>
+      <span style="float:right">
+        <button id="btn-admin">Masuk Admin</button>
+      </span>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <section id="home" class="card">
+    <h2>Selamat Datang di OSIS</h2>
+    <p class="muted">Situs sederhana untuk menampilkan pengumuman, anggota, dan informasi OSIS. Data disimpan di browser (localStorage).</p>
+  </section>
+
+  <section id="announcements" class="card">
+    <h3>Pengumuman Terbaru</h3>
+    <div id="ann-list"></div>
+    <div id="no-ann" class="muted small">Belum ada pengumuman.</div>
+  </section>
+
+  <section id="members" class="card">
+    <h3>Anggota OSIS</h3>
+    <div id="members-grid" class="grid"></div>
+    <div id="no-mem" class="muted small">Belum ada data anggota.</div>
+  </section>
+
+  <section id="about" class="card">
+    <h3>Tentang OSIS</h3>
+    <p>OSIS bertujuan mengembangkan potensi siswa melalui kegiatan organisasi, bakat, dan kepemimpinan.</p>
+  </section>
+
+  <section id="contact" class="card">
+    <h3>Kontak</h3>
+    <p>Hubungi sekretariat OSIS atau email: <strong>osis@sekolah.edu</strong></p>
+  </section>
+
+  <!-- Admin panel (hidden until login) -->
+  <section id="admin-panel" class="card" style="display:none">
+    <h3>Dashboard Admin <span class="admin-badge">Admin</span></h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+      <div>
+        <h4>Tambah Pengumuman</h4>
+        <form id="form-ann">
+          <input id="ann-title" placeholder="Judul" required>
+          <textarea id="ann-content" placeholder="Isi pengumuman" rows="4" required></textarea>
+          <button type="submit">Simpan</button>
+        </form>
+      </div>
+      <div>
+        <h4>Tambah Anggota</h4>
+        <form id="form-member">
+          <input id="mem-name" placeholder="Nama" required>
+          <input id="mem-role" placeholder="Jabatan / Kelas">
+          <button type="submit">Simpan</button>
+        </form>
+      </div>
+    </div>
+
+    <div style="margin-top:12px">
+      <h4>Data Saat Ini</h4>
+      <div id="admin-data"></div>
+    </div>
+
+    <div style="margin-top:12px" class="actions">
+      <button id="btn-logout" class="link-btn">Logout</button>
+      <button id="btn-export">Export JSON</button>
+      <button id="btn-import">Import JSON</button>
+      <input type="file" id="file-import" accept="application/json" style="display:none">
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="container">
+    &copy; <span id="yr"></span> OSIS Sekolah — Static demo (Tema Hijau)
+  </div>
+</footer>
+
+<script>
+// Fix login system
+const ADMIN_PASSWORD = "admin123";
+const btnAdmin = document.getElementById("btn-admin");
+const adminPanel = document.getElementById("admin-panel");
+const btnLogout = document.getElementById("btn-logout");
+
+btnAdmin.addEventListener("click", () => {
+  const pass = prompt("Masukkan password admin:");
+  if(pass === ADMIN_PASSWORD){
+    adminPanel.style.display = "block";
+    btnAdmin.style.display = "none";
+  } else if(pass !== null) {
+    alert("Password salah!");
+  }
+});
+
+btnLogout.addEventListener("click", () => {
+  adminPanel.style.display = "none";
+  btnAdmin.style.display = "inline-block";
+});
+
+document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
